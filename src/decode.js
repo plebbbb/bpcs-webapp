@@ -33,16 +33,16 @@ class Decode extends Component{
 
 
     onSubmitHandler = () => {
-        let data = new FormData()
-        data.append('base_file', this.state.IDfile)
-        data.append("block_height", this.state.BLKHTD)
-        data.append("init_block_factor", this.state.IBFD)
-        data.append("final_block_factor", this.state.FBFD)
-        data.append("write_block_factor", this.state.WBFD)
+        let datae = new FormData()
+        datae.append('base_file', this.state.IDfile)
+        datae.append("block_height", this.state.BLKHTD)
+        datae.append("init_block_factor", this.state.IBFD)
+        datae.append("final_block_factor", this.state.FBFD)
+        datae.append("write_block_factor", this.state.WBFD)
 
         const block = {
             method: "POST",
-            body: data
+            body: datae
         }
 
         fetch("https://bpcs-api.herokuapp.com/decode", block)
@@ -82,19 +82,19 @@ class Decode extends Component{
                         <div class = "f6 pa1">Configure parameters</div>
                         <div className = "flex pa1">
                             <div class = "f6 b db mb2 pr2">Ict</div>
-                            <input class = "f6 w-100 tr" type="text" name="IBF" onChange={this.onChangeHandler}/>
+                            <input class = "f6 w-100 tr" type="text" name="IBFD" onChange={this.onChangeHandler}/>
                         </div>
                         <div className = "flex pa1">
                             <div class = "f6 b db mb2 pr2">Fct</div>
-                            <input class = "f6 w-100 tr" type="text" name="FBF" onChange={this.onChangeHandler}/>
+                            <input class = "f6 w-100 tr" type="text" name="FBFD" onChange={this.onChangeHandler}/>
                         </div>
                         <div className = "flex pa1">
                             <div class = "f6 b db mb2 pr2">Wct</div>
-                            <input  class = "f6 w-100 tr" type="text" name="WBF" onChange={this.onChangeHandler}/>
+                            <input  class = "f6 w-100 tr" type="text" name="WBFD" onChange={this.onChangeHandler}/>
                         </div>
                         <div className = "flex pa1">
                             <div class = "f6 b db mb2 pr2">BlkHt</div>
-                            <input  class = "f6 w-100 tr" type="text" name="BLKHT" onChange={this.onChangeHandler}/>
+                            <input  class = "f6 w-100 tr" type="text" name="BLKHTD" onChange={this.onChangeHandler}/>
                         </div>
                     </div>
                     <div className = "flex pv3 ph1 w-100">
