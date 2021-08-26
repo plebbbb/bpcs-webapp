@@ -2,17 +2,16 @@ import React from 'react';
 import tachyons from 'tachyons';
 import { Component } from 'react';
 const FormData = require('form-data');
-class Encode extends Component{
+class Decode extends Component{
     constructor(props){
         super(props);
         this.state = {
-            Ifile: null,
-            Dfile: null,
-            BLKHT: null,
-            IBF: null,
-            FBF: null,
-            WBF: null,
-            DURL: null,
+            IDfile: null,
+            BLKHTD: null,
+            IBFD: null,
+            FBFD: null,
+            WBFD: null,
+            DURLD: null,
         }
     }
 
@@ -20,8 +19,8 @@ class Encode extends Component{
         this.setState({
             [e.target.name]: e.target.files[0]
         })
-        if(e.target.name === "Ifile") this.setState({FP : URL.createObjectURL(e.target.files[0])})
-        console.log(this.state)
+      //  if(e.target.name === "Ifile") this.setState({FP : URL.createObjectURL(e.target.files[0])})
+       // console.log(this.state)
     }
 
     
@@ -29,25 +28,24 @@ class Encode extends Component{
         this.setState({
             [e.target.name]: e.target.value
         })
-        console.log(this.state)
+     //   console.log(this.state)
     }
 
 
     onSubmitHandler = () => {
         let data = new FormData()
-        data.append('data_file', this.state.Dfile)
-        data.append('base_file', this.state.Ifile)
-        data.append("block_height", this.state.BLKHT)
-        data.append("init_block_factor", this.state.IBF)
-        data.append("final_block_factor", this.state.FBF)
-        data.append("write_block_factor", this.state.WBF)
+        data.append('base_file', this.state.IDfile)
+        data.append("block_height", this.state.BLKHTD)
+        data.append("init_block_factor", this.state.IBFD)
+        data.append("final_block_factor", this.state.FBFD)
+        data.append("write_block_factor", this.state.WBFD)
 
         const block = {
             method: "POST",
             body: data
         }
 
-        fetch("https://bpcs-api.herokuapp.com/encode", block)
+        fetch("https://bpcs-api.herokuapp.com/decode", block)
         .then((response) => {
             const val = response
             response.blob().then((blob) => {
@@ -72,16 +70,12 @@ class Encode extends Component{
         return(
             <div className = "flex">
                 <div className = "flex flex-column pa3 w5">
-                    <div className = "f2 pa1 pb3 tl">Encode files</div>
+                    <div className = "f2 pa1 pb3 tl">Decode files</div>
                     <div class = "bt pb2 bb">
                         <div class = "f6 ph1 pt1">Upload files</div>
                             <div className = "flex ph1 pt1">
-                            <label className = "f4-ns f6-s ba ph3 pv2 mb2 dib bw1 w-100 tc" for="Ifile">{this.state.Ifile != null ? (this.state.Ifile.name.length > 16 ? "Too long to show" : `${this.state.Ifile.name}`):"Upload Base File"}</label>
-                            <input hidden="true" type="file" name="Ifile" id = "Ifile" accept = "image/bmp" onChange={this.onChangeFHandler}/>
-                        </div>
-                        <div className = "flex ph1 pt1">
-                            <label className = "f4-ns f6-s ba ph3 pv2 mb2 dib bw1 w-100 tc" for="Dfile">{this.state.Dfile != null ? (this.state.Dfile.name.length > 16 ? "Too long to show" : `${this.state.Dfile.name}`) :"Upload Data File"}</label>
-                            <input hidden="true" type="file" name="Dfile" id = "Dfile" onChange={this.onChangeFHandler}/>
+                            <label className = "f4-ns f6-s ba ph3 pv2 mb2 dib bw1 w-100 tc" for="IDfile">{this.state.IDfile != null ? (this.state.IDfile.name.length > 16 ? "Too long to show" : `${this.state.IDfile.name}`):"Upload Image File"}</label>
+                            <input hidden="true" type="file" name="IDfile" id = "IDfile" accept = "image/bmp" onChange={this.onChangeFHandler}/>
                         </div>
                     </div>
                     <div class = "pb2 bb">
@@ -112,4 +106,4 @@ class Encode extends Component{
     }
 }
 
-export default Encode;
+export default Decode;
